@@ -1,6 +1,10 @@
 <?php
 
+use App\Http\Controllers\UserController;
+use App\Models\User;
+use Illuminate\Auth\EloquentUserProvider;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -13,7 +17,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/hello-world', function () {
-    return "Olá";
-    //return view('welcome');
+Route::get('user/{user}', [UserController::class, 'show']);
+Route::get('users', [UserController::class, 'index']);
+
+//cria um grupo de rotas :
+Route::prefix('usuarios')->group(function() {
+    Route::get('',function () {
+        return 'usuario';
+    })->name(name:'usuarios');
+
+    Route::get('/{id}', function (){
+        return 'mostrar detalhes';
+    })->name(name:'usuarios.show');
+
+    Route::get("/{id}/tags", function (){
+        return 'tags do usuário';
+    })->name(name:'usuarios.tags');
+});
+
+Route::get('/', function () {
+    return view('welcome');
 });
