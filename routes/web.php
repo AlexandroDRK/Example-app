@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\BusinessController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use App\Models\User;
 use Illuminate\Auth\EloquentUserProvider;
@@ -17,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//rotas de usuários:
 Route::get('user/{user}', [UserController::class, 'show']);
 Route::get('users', [UserController::class, 'index']);
 
@@ -34,6 +37,15 @@ Route::prefix('usuarios')->group(function() {
         return 'tags do usuário';
     })->name(name:'usuarios.tags');
 });
+
+//rotas de empresas:
+Route::get('business', [BusinessController::class,'index'])->name('businesses.index');
+Route::post('business',[BusinessController::class, 'store'])->name('business.store');
+
+
+//rotas de posts:
+Route::get('posts',[PostController::class, 'index'])->name('posts.index');
+Route::get('post/{post}',[PostController::class, 'show'])->name('posts.show');
 
 Route::get('/', function () {
     return view('welcome');

@@ -1,4 +1,4 @@
-@vite(['resources/css/app.css', 'resources/js/app.js'])
+@vite('public/js/app.js')
 @extends('layouts.defaults')
 
 @section('title', 'User Title')
@@ -6,7 +6,8 @@
 <h1> User </h1>
 
 @push('styles')
-<link rel="stylesheet" href= {{ asset('/css/user.css') }} >
+{{--<link rel="stylesheet" href= {{ asset('/css/user.css') }} >--}}
+@vite('public/js/user.js')
 @endpush
 
 Name: {{$user->name}} <br>
